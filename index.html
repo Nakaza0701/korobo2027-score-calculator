@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>交流ロボコン2027 得点計算</title>
-
+    <title>ロボコン得点計算ツール</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <header>
-        <h1>交流ロボコン2027 得点計算</h1>
+        <h1>ロボコン得点計算ツール</h1>
+        <p>1チーム分の得点を計算します。</p>
     </header>
 
     <main>
@@ -19,65 +19,93 @@
         <section id="team-settings">
             <h2>チーム設定</h2>
 
-            <div>
-                <h3>チームA</h3>
-                <label for="team-a-color">チームカラー：</label>
-                <select id="team-a-color">
-                    <option value="">選択してください</option>
+            <div class="team-color">
+                <label for="my-team-color">自チームの色</label>
+                <select id="my-team-color">
+                    <option value="red">赤</option>
+                    <option value="blue">青</option>
                 </select>
             </div>
 
-            <div>
-                <h3>チームB</h3>
-                <label for="team-b-color">チームカラー：</label>
-                <select id="team-b-color">
-                    <option value="">選択してください</option>
+            <div class="team-color">
+                <label for="partner-team-color">タッグメイトの色</label>
+                <select id="partner-team-color">
+                    <option value="blue">青</option>
+                    <option value="red">赤</option>
                 </select>
             </div>
         </section>
 
-        <!-- Aチーム側の山 -->
-        <section id="team-a-area">
-            <h2>チームA側の山</h2>
+        <!-- バケツの登録 -->
+        <section id="bucket-section">
+            <h2>バケツの登録</h2>
+            <p>自チーム側の山に置かれているバケツを登録してください。</p>
 
-            <div id="team-a-buckets">
-                <!-- バケツの入力欄をここに追加する -->
+            <div id="bucket-list">
+
+                <!-- 最初のバケツ -->
+                <div class="bucket-card">
+                    <h3>バケツ 1</h3>
+
+                    <div class="bucket-info">
+                        <label>
+                            バケツの色
+                            <select class="bucket-color">
+                                <option value="red">赤</option>
+                                <option value="blue">青</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            設置場所
+                            <select class="bucket-location">
+                                <option value="summit">山頂</option>
+                                <option value="hut">山小屋</option>
+                                <option value="trailhead">登山口</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="ball-section">
+                        <h4>バケツの中のボール</h4>
+
+                        <div class="ball-list">
+                            <!-- ボールはJavaScriptで追加 -->
+                        </div>
+
+                        <button type="button" class="add-ball-button">
+                            ボールを追加
+                        </button>
+                    </div>
+                </div>
+
             </div>
 
-            <button id="add-team-a-bucket">バケツを追加</button>
-        </section>
+            <button type="button" id="add-bucket-button">
+                バケツを追加
+            </button>
 
-        <!-- Bチーム側の山 -->
-        <section id="team-b-area">
-            <h2>チームB側の山</h2>
-
-            <div id="team-b-buckets">
-                <!-- バケツの入力欄をここに追加する -->
-            </div>
-
-            <button id="add-team-b-bucket">バケツを追加</button>
+            <p id="bucket-count">バケツ：1 / 6 個</p>
+            <p id="ball-count">ボール：0 / 12 個</p>
         </section>
 
         <!-- 得点表示 -->
-        <section id="score">
+        <section id="score-section">
             <h2>得点</h2>
 
-            <div>
-                <h3>チームA</h3>
-                <p id="team-a-score">0点</p>
-            </div>
+            <p id="total-score">
+                合計得点：0 点
+            </p>
 
-            <div>
-                <h3>チームB</h3>
-                <p id="team-b-score">0点</p>
-            </div>
-
-            <div>
-                <h3>タッグ合計</h3>
-                <p id="total-score">0点</p>
+            <div id="score-details">
+                <!-- 得点の内訳はJavaScriptで表示 -->
             </div>
         </section>
     </main>
+
+    <footer>
+        <p>ロボコン得点計算ツール</p>
+    </footer>
 
     <script src="js/main.js"></script>
 </body>
