@@ -1,5 +1,4 @@
 
-
 // ========================================
 // チーム設定
 // ========================================
@@ -8,27 +7,24 @@
 const myTeamColor = document.getElementById("my-team-color");
 const partnerTeamColor = document.getElementById("partner-team-color");
 
-// 自チームの色が変更されたとき
-myTeamColor.addEventListener("change", function() {
+// チームカラーの確認
+function checkTeamColor() {
     if (myTeamColor.value === partnerTeamColor.value) {
-        alert("自チームとタッグメイトの色を入れ替えます。");
+        alert("自チームとタッグメイトの色を別々に設定してください。");
 
-        // 自チームの色を反対色にする
-        myTeamColor.value =
-            partnerTeamColor.value === "red" ? "blue" : "red";
-    }
-});
-
-// タッグメイトの色が変更されたとき
-partnerTeamColor.addEventListener("change", function() {
-    if (partnerTeamColor.value === myTeamColor.value) {
-        alert("自チームとタッグメイトの色を入れ替えます。");
-
-        // タッグメイトの色を反対色にする
+        // タッグメイトの色を自動的に反対色へ変更
         partnerTeamColor.value =
             myTeamColor.value === "red" ? "blue" : "red";
     }
-});
+}
+
+// 色が変更されたときに確認
+myTeamColor.addEventListener("change", checkTeamColor);
+partnerTeamColor.addEventListener("change", checkTeamColor);
+
+// 初期状態も確認
+checkTeamColor();
+
 
 // ========================================
 // バケツ・ボールの管理
