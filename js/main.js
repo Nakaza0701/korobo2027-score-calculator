@@ -430,3 +430,51 @@ partnerTeamColor.addEventListener("change", calculateScore);
 
 // 初期状態の得点を計算
 calculateScore();
+
+// ========================================
+// リセット機能
+// ========================================
+
+const resetButton = document.getElementById("reset-button");
+
+function resetData() {
+    // 本当にリセットするか確認
+    const result = confirm(
+        "バケツとボールの登録内容をすべてリセットしますか？"
+    );
+
+    // キャンセルされた場合は何もしない
+    if (!result) {
+        return;
+    }
+
+    // 最初のバケツ以外を削除
+    while (bucketList.children.length > 1) {
+        bucketList.lastElementChild.remove();
+    }
+
+    // 最初のバケツを取得
+    const firstBucket = bucketList.firstElementChild;
+
+    // 最初のバケツの色を自チーム色に戻す
+    firstBucket.querySelector(".bucket-color").value =
+        myTeamColor.value;
+
+    // 設置場所を山頂に戻す
+    firstBucket.querySelector(".bucket-location").value =
+        "summit";
+
+    // 最初のバケツ内のボールをすべて削除
+    firstBucket.querySelector(".ball-list").innerHTML = "";
+
+    // 登録数を初期状態に戻す
+    bucketCount = 1;
+    ballCount = 0;
+
+    // 表示を更新
+    updateCount();
+    calculateScore();
+}
+
+// リセットボタンの動作
+resetButton.addEventListener("click", resetData);
