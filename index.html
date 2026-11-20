@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ロボコン得点計算ツール</title>
+    <title>ロボコン得点計算ツール v20.2012</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -16,25 +16,27 @@
 
     <main>
         <!-- チーム設定 -->
-        <section id="team-settings">
-            <h2>チーム設定</h2>
+    <section id="team-settings">
+        <h2>チーム設定</h2>
 
-            <div class="team-color">
-                <label for="my-team-color">自チームの色</label>
-                <select id="my-team-color">
-                    <option value="red">赤</option>
-                    <option value="blue">青</option>
-                </select>
-            </div>
+        <div class="team-color">
+            <label for="my-team-color">自チームの色</label>
+            <select id="my-team-color">
+                <option value="red">赤</option>
+                <option value="blue">青</option>
+            </select>
+        </div>
 
-            <div class="team-color">
-                <label for="partner-team-color">タッグメイトの色</label>
-                <select id="partner-team-color">
-                    <option value="blue">青</option>
-                    <option value="red">赤</option>
-                </select>
-            </div>
-        </section>
+        <div class="team-color">
+            <label for="partner-team-color">タッグメイトの色</label>
+            <select id="partner-team-color">
+                <option value="blue">青</option>
+                <option value="red">赤</option>
+            </select>
+        </div>
+
+        <p id="team-color-warning"></p>
+    </section>
 
         <!-- バケツの登録 -->
         <section id="bucket-section">
