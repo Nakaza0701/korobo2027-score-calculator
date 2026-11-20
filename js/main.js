@@ -13,14 +13,6 @@ function updatePartnerTeamColor() {
         myTeamColor.value === "red" ? "blue" : "red";
 }
 
-// 色が変更されたときに確認
-myTeamColor.addEventListener("change", checkTeamColor);
-partnerTeamColor.addEventListener("change", checkTeamColor);
-
-// 初期状態も確認
-checkTeamColor();
-
-
 // ========================================
 // バケツ・ボールの管理
 // ========================================
