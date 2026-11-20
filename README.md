@@ -63,6 +63,7 @@
 
 ## ディレクトリ構成
 
+`
 kosen-robocon-score-calculator/
 ├── index.html
 ├── css/
@@ -70,6 +71,7 @@ kosen-robocon-score-calculator/
 ├── js/
 │   └── main.js
 └── README.md
+`
 
 ## 開発者
 
