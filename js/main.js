@@ -125,6 +125,7 @@ function addBucket() {
 
     updateCount();
     updateColorOptions();
+    calculateScore();
 }
 
 // ========================================
@@ -148,6 +149,7 @@ function deleteBucket(button) {
     bucketCount--;
 
     updateCount();
+    calculateScore();
 
     // バケツ番号を振り直す
     updateBucketNumbers();
@@ -224,6 +226,7 @@ function addBall(button) {
 
     updateCount();
     updateColorOptions();
+    calculateScore();
 }
 
 // ========================================
@@ -241,6 +244,7 @@ function deleteBall(button) {
     ballCount--;
 
     updateCount();
+    calculateScore();
 }
 
 // ========================================
@@ -311,3 +315,118 @@ partnerTeamColor.addEventListener("change", updateColorOptions);
 
 // 初期状態を更新
 updateColorOptions();
+
+// ========================================
+// 得点計算
+// ========================================
+
+// 場所ごとの倍率
+const locationMultipliers = {
+    summit: 4,
+    hut: 2,
+    trailhead: 1
+};
+
+// 場所の表示名
+const locationNames = {
+    summit: "山頂",
+    hut: "山小屋",
+    trailhead: "登山口"
+};
+
+// オブジェクトの交換倍率を取得
+function getExchangeMultiplier(color) {
+    if (color === myTeamColor.value) {
+        return 1;
+    }
+
+    return 5;
+}
+
+// 得点計算
+function calculateScore() {
+    let totalScore = 0;
+    const details = [];
+
+    // すべてのバケツを取得
+    const buckets = bucketList.querySelectorAll(".bucket-card");
+
+    buckets.forEach((bucket, index) => {
+        // バケツの情報を取得
+        const bucketColor =
+            bucket.querySelector(".bucket-color").value;
+
+        const location =
+            bucket.querySelector(".bucket-location").value;
+
+        const locationMultiplier =
+            locationMultipliers[location];
+
+        const locationName =
+            locationNames[location];
+
+        // バケツの得点を計算
+        const bucketMultiplier =
+            getExchangeMultiplier(bucketColor);
+
+        const bucketScore =
+            1 * locationMultiplier * bucketMultiplier;
+
+        totalScore += bucketScore;
+
+        // バケツの内訳
+        details.push(
+            `バケツ ${index + 1}（${bucketColor === myTeamColor.value ? "自チーム色" : "タッグメイト色"}）：${bucketScore}点`
+        );
+
+        // バケツ内のボールを取得
+        const balls = bucket.querySelectorAll(".ball-item");
+
+        balls.forEach((ball, ballIndex) => {
+            const ballColor =
+                ball.querySelector(".ball-color").value;
+
+            // ボールの交換倍率
+            const ballMultiplier =
+                getExchangeMultiplier(ballColor);
+
+            // ボールの得点
+            const ballScore =
+                2 * locationMultiplier * ballMultiplier;
+
+            totalScore += ballScore;
+
+            // ボールの内訳
+            details.push(
+                `　ボール ${ballIndex + 1}（${ballColor === myTeamColor.value ? "自チーム色" : "タッグメイト色"}）：${ballScore}点`
+            );
+        });
+
+        // バケツごとの小計を表示するための区切り
+        details.push(
+            `　設置場所：${locationName}（×${locationMultiplier}）`
+        );
+    });
+
+    // 合計得点を表示
+    document.getElementById("total-score").textContent =
+        `合計得点：${totalScore} 点`;
+
+    // 得点の内訳を表示
+    document.getElementById("score-details").textContent =
+        details.join("\n");
+}
+
+// ========================================
+// 得点の自動更新
+// ========================================
+
+// バケツ・ボールの色や設置場所が変更されたとき
+bucketList.addEventListener("change", calculateScore);
+
+// チームカラーが変更されたとき
+myTeamColor.addEventListener("change", calculateScore);
+partnerTeamColor.addEventListener("change", calculateScore);
+
+// 初期状態の得点を計算
+calculateScore();
