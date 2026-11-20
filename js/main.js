@@ -11,6 +11,17 @@ const partnerTeamColor = document.getElementById("partner-team-color");
 function updatePartnerTeamColor() {
     partnerTeamColor.value =
         myTeamColor.value === "red" ? "blue" : "red";
+
+    // 背景色をチームカラーに合わせる
+    document.body.classList.toggle(
+        "theme-blue",
+        myTeamColor.value === "blue"
+    );
+
+    document.body.classList.toggle(
+        "theme-red",
+        myTeamColor.value === "red"
+    );
 }
 
 // ========================================
