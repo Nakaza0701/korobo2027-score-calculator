@@ -6,17 +6,15 @@
 // HTMLの要素を取得
 const myTeamColor = document.getElementById("my-team-color");
 const partnerTeamColor = document.getElementById("partner-team-color");
-const teamColorWarning = document.getElementById("team-color-warning");
 
 // チームカラーの確認
 function checkTeamColor() {
     if (myTeamColor.value === partnerTeamColor.value) {
-        teamColorWarning.textContent =
-            "警告：自チームとタッグメイトの色が同じです。";
+        alert("自チームとタッグメイトの色を別々に設定してください。");
 
-        teamColorWarning.style.color = "red";
-    } else {
-        teamColorWarning.textContent = "";
+        // タッグメイトの色を自動的に反対色へ変更
+        partnerTeamColor.value =
+            myTeamColor.value === "red" ? "blue" : "red";
     }
 }
 
@@ -26,6 +24,7 @@ partnerTeamColor.addEventListener("change", checkTeamColor);
 
 // 初期状態も確認
 checkTeamColor();
+
 
 // ========================================
 // バケツ・ボールの管理
