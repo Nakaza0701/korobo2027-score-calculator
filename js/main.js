@@ -35,7 +35,7 @@ const MAX_BUCKETS = 6;
 const MAX_BALLS = 12;
 
 // バケツとボールの登録数
-let bucketCount = 1;
+let bucketCount = 0;
 let ballCount = 0;
 
 // HTMLの要素を取得
@@ -448,27 +448,11 @@ function resetData() {
         return;
     }
 
-    // 最初のバケツ以外を削除
-    while (bucketList.children.length > 1) {
-        bucketList.lastElementChild.remove();
-    }
-
-    // 最初のバケツを取得
-    const firstBucket = bucketList.firstElementChild;
-
-    // 最初のバケツの色を自チーム色に戻す
-    firstBucket.querySelector(".bucket-color").value =
-        myTeamColor.value;
-
-    // 設置場所を山頂に戻す
-    firstBucket.querySelector(".bucket-location").value =
-        "summit";
-
-    // 最初のバケツ内のボールをすべて削除
-    firstBucket.querySelector(".ball-list").innerHTML = "";
+    // すべてのバケツを削除
+    bucketList.innerHTML = "";
 
     // 登録数を初期状態に戻す
-    bucketCount = 1;
+    bucketCount = 0;
     ballCount = 0;
 
     // 表示を更新
