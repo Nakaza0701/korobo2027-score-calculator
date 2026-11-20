@@ -124,6 +124,7 @@ function addBucket() {
     bucketCount++;
 
     updateCount();
+    updateColorOptions();
 }
 
 // ========================================
@@ -222,6 +223,7 @@ function addBall(button) {
     ballCount++;
 
     updateCount();
+    updateColorOptions();
 }
 
 // ========================================
@@ -256,3 +258,56 @@ bucketList.addEventListener("click", function(event) {
         deleteBall(event.target);
     }
 });
+
+// ========================================
+// バケツ・ボールの色設定
+// ========================================
+
+function updateColorOptions() {
+    // 現在のチームカラーを取得
+    const colors = [
+        {
+            value: myTeamColor.value,
+            label: myTeamColor.options[myTeamColor.selectedIndex].text
+        },
+        {
+            value: partnerTeamColor.value,
+            label: partnerTeamColor.options[partnerTeamColor.selectedIndex].text
+        }
+    ];
+
+    // すべてのバケツ・ボールの色選択欄を取得
+    const colorSelects = document.querySelectorAll(
+        ".bucket-color, .ball-color"
+    );
+
+    colorSelects.forEach(select => {
+        // 現在選択されている色を保存
+        const previousValue = select.value;
+
+        // 選択肢を初期化
+        select.innerHTML = "";
+
+        // チームカラーを選択肢に追加
+        colors.forEach(color => {
+            const option = document.createElement("option");
+
+            option.value = color.value;
+            option.textContent = color.label;
+
+            select.appendChild(option);
+        });
+
+        // 以前の選択色が存在すれば維持する
+        if (colors.some(color => color.value === previousValue)) {
+            select.value = previousValue;
+        }
+    });
+}
+
+// チームカラーが変更されたときに更新
+myTeamColor.addEventListener("change", updateColorOptions);
+partnerTeamColor.addEventListener("change", updateColorOptions);
+
+// 初期状態を更新
+updateColorOptions();
