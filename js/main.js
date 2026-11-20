@@ -1,4 +1,5 @@
 
+
 // ========================================
 // チーム設定
 // ========================================
@@ -7,32 +8,27 @@
 const myTeamColor = document.getElementById("my-team-color");
 const partnerTeamColor = document.getElementById("partner-team-color");
 
-function checkTeamColor(changedTeam) {
-    if (myTeamColor.value === partnerTeamColor.value) {
-        alert("自チームとタッグメイトの色を反転します。");
-
-        // 変更された側の色を反転
-        if (changedTeam === "my") {
-            myTeamColor.value =
-                myTeamColor.value === "red" ? "blue" : "red";
-        } else {
-            partnerTeamColor.value =
-                partnerTeamColor.value === "red" ? "blue" : "red";
-        }
-    }
-}
-
-// 色が変更されたときに確認
+// 自チームの色が変更されたとき
 myTeamColor.addEventListener("change", function() {
-    checkTeamColor("my");
+    if (myTeamColor.value === partnerTeamColor.value) {
+        alert("自チームとタッグメイトの色を入れ替えます。");
+
+        // 自チームの色を反対色にする
+        myTeamColor.value =
+            partnerTeamColor.value === "red" ? "blue" : "red";
+    }
 });
 
+// タッグメイトの色が変更されたとき
 partnerTeamColor.addEventListener("change", function() {
-    checkTeamColor("partner");
-});
+    if (partnerTeamColor.value === myTeamColor.value) {
+        alert("自チームとタッグメイトの色を入れ替えます。");
 
-// 初期状態も確認
-checkTeamColor("my");
+        // タッグメイトの色を反対色にする
+        partnerTeamColor.value =
+            myTeamColor.value === "red" ? "blue" : "red";
+    }
+});
 
 // ========================================
 // バケツ・ボールの管理
