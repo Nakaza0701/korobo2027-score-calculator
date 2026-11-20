@@ -1,1 +1,84 @@
-# 交流ロボコン2027 点数計算サイト
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交流ロボコン2027 得点計算</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <h1>交流ロボコン2027 得点計算</h1>
+    </header>
+
+    <main>
+        <!-- チーム設定 -->
+        <section id="team-settings">
+            <h2>チーム設定</h2>
+
+            <div>
+                <h3>チームA</h3>
+                <label for="team-a-color">チームカラー：</label>
+                <select id="team-a-color">
+                    <option value="">選択してください</option>
+                </select>
+            </div>
+
+            <div>
+                <h3>チームB</h3>
+                <label for="team-b-color">チームカラー：</label>
+                <select id="team-b-color">
+                    <option value="">選択してください</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Aチーム側の山 -->
+        <section id="team-a-area">
+            <h2>チームA側の山</h2>
+
+            <div id="team-a-buckets">
+                <!-- バケツの入力欄をここに追加する -->
+            </div>
+
+            <button id="add-team-a-bucket">バケツを追加</button>
+        </section>
+
+        <!-- Bチーム側の山 -->
+        <section id="team-b-area">
+            <h2>チームB側の山</h2>
+
+            <div id="team-b-buckets">
+                <!-- バケツの入力欄をここに追加する -->
+            </div>
+
+            <button id="add-team-b-bucket">バケツを追加</button>
+        </section>
+
+        <!-- 得点表示 -->
+        <section id="score">
+            <h2>得点</h2>
+
+            <div>
+                <h3>チームA</h3>
+                <p id="team-a-score">0点</p>
+            </div>
+
+            <div>
+                <h3>チームB</h3>
+                <p id="team-b-score">0点</p>
+            </div>
+
+            <div>
+                <h3>タッグ合計</h3>
+                <p id="total-score">0点</p>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
