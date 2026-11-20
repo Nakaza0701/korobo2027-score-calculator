@@ -159,3 +159,81 @@ bucketList.addEventListener("click", function(event) {
         deleteBucket(event.target);
     }
 });
+
+// ========================================
+// ボールの追加
+// ========================================
+
+function addBall(button) {
+    // 最大数を超えていないか確認
+    if (ballCount >= MAX_BALLS) {
+        alert("ボールは最大12個までです。");
+        return;
+    }
+
+    // ボールを追加するバケツを取得
+    const bucketCard = button.closest(".bucket-card");
+
+    // ボール一覧を取得
+    const ballList = bucketCard.querySelector(".ball-list");
+
+    // ボールの要素を作成
+    const ballItem = document.createElement("div");
+    ballItem.className = "ball-item";
+
+    // ボールのHTMLを設定
+    ballItem.innerHTML = `
+        <label>
+            ボールの色
+            <select class="ball-color">
+                <option value="red">赤</option>
+                <option value="blue">青</option>
+            </select>
+        </label>
+
+        <button type="button" class="delete-ball-button">
+            削除
+        </button>
+    `;
+
+    // ボール一覧に追加
+    ballList.appendChild(ballItem);
+
+    // ボール数を更新
+    ballCount++;
+
+    updateCount();
+}
+
+// ========================================
+// ボールの削除
+// ========================================
+
+function deleteBall(button) {
+    // 削除対象のボールを取得
+    const ballItem = button.closest(".ball-item");
+
+    // ボールを削除
+    ballItem.remove();
+
+    // ボール数を更新
+    ballCount--;
+
+    updateCount();
+}
+
+// ========================================
+// ボール追加・削除ボタンの動作
+// ========================================
+
+bucketList.addEventListener("click", function(event) {
+    // ボール追加ボタン
+    if (event.target.classList.contains("add-ball-button")) {
+        addBall(event.target);
+    }
+
+    // ボール削除ボタン
+    if (event.target.classList.contains("delete-ball-button")) {
+        deleteBall(event.target);
+    }
+});
