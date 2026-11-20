@@ -7,15 +7,10 @@
 const myTeamColor = document.getElementById("my-team-color");
 const partnerTeamColor = document.getElementById("partner-team-color");
 
-// チームカラーの確認
-function checkTeamColor() {
-    if (myTeamColor.value === partnerTeamColor.value) {
-        alert("自チームとタッグメイトの色を別々に設定してください。");
-
-        // タッグメイトの色を自動的に反対色へ変更
-        partnerTeamColor.value =
-            myTeamColor.value === "red" ? "blue" : "red";
-    }
+// タッグメイトの色を自動設定
+function updatePartnerTeamColor() {
+    partnerTeamColor.value =
+        myTeamColor.value === "red" ? "blue" : "red";
 }
 
 // 色が変更されたときに確認
@@ -310,10 +305,14 @@ function updateColorOptions() {
 }
 
 // チームカラーが変更されたときに更新
-myTeamColor.addEventListener("change", updateColorOptions);
-partnerTeamColor.addEventListener("change", updateColorOptions);
+myTeamColor.addEventListener("change", function() {
+    updatePartnerTeamColor();
+    updateColorOptions();
+    calculateScore();
+});
 
 // 初期状態を更新
+updatePartnerTeamColor();
 updateColorOptions();
 
 // ========================================
@@ -423,10 +422,6 @@ function calculateScore() {
 
 // バケツ・ボールの色や設置場所が変更されたとき
 bucketList.addEventListener("change", calculateScore);
-
-// チームカラーが変更されたとき
-myTeamColor.addEventListener("change", calculateScore);
-partnerTeamColor.addEventListener("change", calculateScore);
 
 // 初期状態の得点を計算
 calculateScore();
