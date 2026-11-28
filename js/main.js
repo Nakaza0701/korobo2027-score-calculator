@@ -191,6 +191,12 @@ function addBall(button) {
         return;
     }
 
+    // このバケツのボール数を確認
+    if (ballList.querySelectorAll(".ball-item").length >= 2) {
+        alert("1つのバケツに入れられるボールは最大2個までです。");
+        return;
+    }
+    
     // ボールを追加するバケツを取得
     const bucketCard = button.closest(".bucket-card");
 
