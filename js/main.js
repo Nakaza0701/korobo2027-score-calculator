@@ -185,6 +185,12 @@ bucketList.addEventListener("click", function(event) {
 // ========================================
 
 function addBall(button) {
+    // ボールを追加するバケツを取得
+    const bucketCard = button.closest(".bucket-card");
+    
+    // ボール一覧を取得
+    const ballList = bucketCard.querySelector(".ball-list");
+    
     // 最大数を超えていないか確認
     if (ballCount >= MAX_BALLS) {
         alert("ボールは最大12個までです。");
@@ -196,12 +202,6 @@ function addBall(button) {
         alert("1つのバケツに入れられるボールは最大2個までです。");
         return;
     }
-    
-    // ボールを追加するバケツを取得
-    const bucketCard = button.closest(".bucket-card");
-
-    // ボール一覧を取得
-    const ballList = bucketCard.querySelector(".ball-list");
 
     // ボールの要素を作成
     const ballItem = document.createElement("div");
